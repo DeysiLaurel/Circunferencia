@@ -22,13 +22,13 @@ class Circunferencia {
     }
 
     public function crear() {
-        $query = "INSERT INTO " . $this->table_name . " SET detalle=:detalle, radio=:radio, diametro=:diametro, area=:area, longitud=:longitud";
-        $stmt = $this->conn->prepare($query);
-
-        // Cálculos matemáticos de la circunferencia
+        // Cálculos matemáticos corregidos con los operadores '*' correspondientes
         $this->diametro = $this->radio * 2;
         $this->area = pi() * pow($this->radio, 2);
         $this->longitud = 2 * pi() * $this->radio;
+
+        $query = "INSERT INTO " . $this->table_name . " SET detalle=:detalle, radio=:radio, diametro=:diametro, area=:area, longitud=:longitud";
+        $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(":detalle", $this->detalle);
         $stmt->bindParam(":radio", $this->radio);
